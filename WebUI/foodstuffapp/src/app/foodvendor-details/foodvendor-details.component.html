@@ -2,15 +2,17 @@
     <h1 class="dispay-6 fw-bold">Food Vendors</h1>
 </div> 
 <div class="row mt-5">
-    <div class="col-6">
+    <div class="col-12">
         <app-foodvendor-detail-form />
     </div>
-    <div class="col-6">
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
         <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-start mb-2 border px-4 py-3 rounded-3" *ngFor="let fvd of service.list">
                 <div class="flex-grow-1 mouse-hover" (click)="populateForm(fvd)">
-                    <div class="fw-bold">{{fvd.firstName}}</div>
-                    <div class="fw-bold">{{fvd.lastName}}</div>
+                    <div class="fw-bold">{{fvd.firstName}} {{fvd.lastName}}</div>
                 </div>
                 <span clas="text-secondary">
                     <i class="fa-solid fa-trash-can fa-lg mouse-hover" (click)="onDelete(fvd.id)"></i>
