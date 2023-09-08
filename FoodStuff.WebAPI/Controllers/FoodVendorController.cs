@@ -33,49 +33,89 @@ namespace FoodStuff.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<FoodVendor>> CreateFoodVendor(FoodVendor foodVendor)
         {
-
-            // Create the food vendor.
-            var createdFoodVendor = await _service.CreateFoodVendorAsync(foodVendor);
-
-            if (createdFoodVendor == null)
+            try
             {
+                // Validate the input data.
+                if (ModelState.IsValid)
+                {
+                    // Create the food vendor.
+                    var createdFoodVendor = await _service.CreateFoodVendorAsync(foodVendor);
+
+                    // Return the list of food vendors.
+                    return Ok(createdFoodVendor);
+                }
+
+                // Return errors.
+                return BadRequest(ModelState);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception.
+                _logger.LogError(ex, "Failed to create food vendor");
+
+                // Return an error message.
                 return BadRequest("Failed to create food vendor");
             }
-
-            // Return the list of food vendors.
-            return Ok(await _service.GetFoodVendorsAsync());
         }
 
         [HttpPut]
         public async Task<ActionResult<FoodVendor>> UpdateFoodVendor(FoodVendor foodVendor)
         {
-
-            // Update the food vendor.
-            var updatedFoodVendor = await _service.UpdateFoodVendorAsync(foodVendor);
-
-            if (updatedFoodVendor == null)
+            try
             {
+                // Validate the input data.
+                if (ModelState.IsValid)
+                {
+                    // Update the food vendor.
+                    var updatedFoodVendor = await _service.UpdateFoodVendorAsync(foodVendor);
+
+                    if (updatedFoodVendor == null)
+                    {
+                        return BadRequest("Failed to update food vendor");
+                    }
+
+                    // Return the list of food vendors.
+                    return Ok(updatedFoodVendor);
+                }
+
+                // Return errors.
+                return BadRequest(ModelState);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception.
+                _logger.LogError(ex, "Failed to update food vendor");
+
+                // Return an error message.
                 return BadRequest("Failed to update food vendor");
             }
-
-            // Return the list of food vendors.
-            return Ok(await _service.GetFoodVendorsAsync());
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<FoodVendor>> RemoveFoodVendor(int id)
         {
-            var foodVendor = await _service.GetFoodVendorByIdAsync(id);
-
-            if (foodVendor == null)
+            try
             {
-                return NotFound("Food vendor with id {id} not found");
+                var foodVendor = await _service.GetFoodVendorByIdAsync(id);
+
+                if (foodVendor == null)
+                {
+                    return NotFound("Food vendor with id {id} not found");
+                }
+
+                await _service.RemoveFoodVendorAsync(id);
+
+                // Return the list of food vendors.
+                return Ok(await _service.GetFoodVendorsAsync());
             }
+            catch (Exception ex)
+            {
+                // Log the exception.
+                _logger.LogError(ex, "Failed to remove food vendor");
 
-            await _service.RemoveFoodVendorAsync(id);
-
-            // Return the list of food vendors.
-            return Ok(await _service.GetFoodVendorsAsync());
+                // Return an error message.
+                return BadRequest("Failed to remove food vendor");
+            }
         }
     }
 }
