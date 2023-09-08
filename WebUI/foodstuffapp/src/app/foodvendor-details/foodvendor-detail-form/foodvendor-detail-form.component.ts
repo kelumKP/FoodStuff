@@ -18,16 +18,35 @@ export class FoodvendorDetailFormComponent {
     this.service.formSubmitted = true
     if(form.valid)
     {
-      this.service.postFoodVendorDetail()
-      .subscribe({
-        next: res => {
-          this.service.list = res as FoodvendorDetail[]
-          this.service.resetForm(form)
-          this.toastr.success('Inserted Successfully', 'Food Vendor Register')
-        },
-        error: err => { console.log(err)}
-        
-      })
+      if (this.service.formData.id == 0) {
+        this.insertRecord(form)
+      } else {
+        this.updateRecord(form)
+      }
     }
+  }
+
+  insertRecord(form: NgForm)
+  {
+    this.service.postFoodVendorDetail()
+    .subscribe({
+      next: res => {
+        this.service.list = res as FoodvendorDetail[]
+        this.service.resetForm(form)
+        this.toastr.success('Inserted Successfully', 'Food Vendor Register')
+      },
+      error: err => { console.log(err)}
+    })
+  }
+  updateRecord(form: NgForm){
+    this.service.putFoodVendorDetail()
+    .subscribe({
+      next: res => {
+        this.service.list = res as FoodvendorDetail[]
+        this.service.resetForm(form)
+        this.toastr.info('Updated Successfully', 'Food Vendor Register')
+      },
+      error: err => { console.log(err)}
+    })
   }
 }

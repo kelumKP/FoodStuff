@@ -28,6 +28,14 @@ export class FoodvendorDetailService {
     return this.http.post(this.url, this.formData)
   }
 
+  putFoodVendorDetail(){
+    return this.http.put(this.url, this.formData)
+  }
+
+  removeFoodVendorDetail(id:number){
+    return this.http.delete(this.url + '/' + id)
+  }
+
   resetForm(form: NgForm){
     form.form.reset()
     this.formData = new FoodvendorDetail()
