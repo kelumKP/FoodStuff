@@ -9,7 +9,7 @@ namespace FoodStuff.Domain.Abstraction
     public interface IFoodVendorService
     {
         Task<IEnumerable<FoodVendor>> GetFoodVendorsAsync();
-        Task<FoodVendor> CreateFoodVendorAsync(FoodVendor foodVendor);
+        Task<bool> CreateFoodVendorAsync(FoodVendor foodVendor);
         Task<bool> UpdateFoodVendorAsync(FoodVendor foodVendor);
         Task<bool> RemoveFoodVendorAsync(int id);
         Task<FoodVendor> GetFoodVendorByIdAsync(int id);

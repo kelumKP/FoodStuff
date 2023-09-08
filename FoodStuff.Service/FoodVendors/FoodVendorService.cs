@@ -26,19 +26,12 @@ namespace FoodStuff.Service.FoodVendors
             return foodVendors;
         }
 
-        public async Task<FoodVendor> CreateFoodVendorAsync(FoodVendor foodVendor)
+        public async Task<bool> CreateFoodVendorAsync(FoodVendor foodVendor)
         {
             // Create a new food vendor.
             var createdFoodVendor = await _foodVendorRepository.CreateFoodVendorAsync(foodVendor);
 
-            // Create a new FoodVendor object.
-            var foodVendorObj = new FoodVendor();
-            foodVendor.Id = foodVendor.Id;
-            foodVendor.FirstName = foodVendor.FirstName;
-            foodVendor.LastName = foodVendor.LastName;
-
-
-            return foodVendorObj;
+            return createdFoodVendor;
         }
 
         public async Task<bool> UpdateFoodVendorAsync(FoodVendor foodVendor)
