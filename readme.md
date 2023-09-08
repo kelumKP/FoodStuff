@@ -20,14 +20,14 @@ test
 
 3. FoodStuff.Domain.UnitTests
 
-![Alt text](WebUI\screenshots\default_ui.png)
+![Alt text](WebUI/screenshots/default_ui.png)
 
-![Alt text](WebUI\screenshots\frontend_validation.png)
+![Alt text](WebUI/screenshots/frontend_validation.png)
 
-![Alt text](WebUI\screenshots\food_vendor_updated.png)
+![Alt text](WebUI/screenshots/food_vendor_updated.png)
 
-![Alt text](WebUI\screenshots\food_vendor_deleted.png)
+![Alt text](WebUI/screenshots/food_vendor_deleted.png)
 
-![Alt text](WebUI\screenshots\food_vendor_added.png)
+![Alt text](WebUI/screenshots/food_vendor_added.png)
 
-![Alt text](WebUI\screenshots\swagger_api.png)
+![Alt text](WebUI/screenshots/swagger_api.png)
