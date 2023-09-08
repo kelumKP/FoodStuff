@@ -1,0 +1,12 @@
+src
+├── app
+│   ├── foodvendor-details
+│   │   ├── foodvendor-details.component.ts|.html
+│   │   └── foodvendor-detail-form
+│   │       └── food-vendor-detail-form.component.ts|.html
+│   ├── shared
+│   │   ├── foodvendor-detail.service.ts
+│   │   └── foodvendor-detail.model.ts
+│   └── app.module.ts
+├── styles.css (global css rules)
+└── index.html (cdn path for bootstrap & fa icons)

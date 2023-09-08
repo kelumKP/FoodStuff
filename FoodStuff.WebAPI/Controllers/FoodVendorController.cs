@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace FoodStuff.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("API/[controller]")]
     public class FoodVendorController : ControllerBase
     {
 
@@ -58,7 +58,8 @@ namespace FoodStuff.WebAPI.Controllers
                 return BadRequest("Failed to update food vendor");
             }
 
-            return Ok(updatedFoodVendor);
+            // Return the list of food vendors.
+            return Ok(await _service.GetFoodVendorsAsync());
         }
 
         [HttpDelete("{id}")]
@@ -73,7 +74,8 @@ namespace FoodStuff.WebAPI.Controllers
 
             await _service.RemoveFoodVendorAsync(id);
 
-            return Ok(foodVendor);
+            // Return the list of food vendors.
+            return Ok(await _service.GetFoodVendorsAsync());
         }
     }
 }

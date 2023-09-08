@@ -46,6 +46,7 @@ builder.Services.AddDbContext<DataContext>(options => {
     options.UseSqlServer(conn);
 });
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -55,6 +56,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(options =>
+//options.WithOrigins("http://localhost:61402")
+ options.WithOrigins("*")
+.AllowAnyMethod()
+.AllowAnyHeader());
 
 app.UseHttpsRedirection();
 
