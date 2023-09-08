@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{00E37210-59C4-4EE6-9F3C-F2FEA44FAD03}"
-	ProjectSection(SolutionItems) = preProject
-		readme.md = readme.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{21F568FE-F29D-4D72-AA7E-8829393C14CA}"
 EndProject
@@ -34,11 +31,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStuff.DAL", "FoodStuff.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStuff.Service", "FoodStuff.Service\FoodStuff.Service.csproj", "{5032A694-B4F6-41BC-B33D-2682359F022C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodStuff.Service.IntegrationTests", "FoodStuff.Service.IntegrationTests\FoodStuff.Service.IntegrationTests.csproj", "{D3711EAD-BEF8-4B5B-BED8-1739A6FAFCC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStuff.Service.IntegrationTests", "FoodStuff.Service.IntegrationTests\FoodStuff.Service.IntegrationTests.csproj", "{D3711EAD-BEF8-4B5B-BED8-1739A6FAFCC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodStuff.Service.UnitTests", "FoodStuff.Service.UnitTests\FoodStuff.Service.UnitTests.csproj", "{2C7E8889-3051-4127-B299-4146D62D4828}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStuff.Service.UnitTests", "FoodStuff.Service.UnitTests\FoodStuff.Service.UnitTests.csproj", "{2C7E8889-3051-4127-B299-4146D62D4828}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodStuff.Domain.UnitTests", "FoodStuff.Domain.UnitTests\FoodStuff.Domain.UnitTests.csproj", "{1DDA35EE-D3DD-4F32-8001-E4CF19AD90AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodStuff.Domain.UnitTests", "FoodStuff.Domain.UnitTests\FoodStuff.Domain.UnitTests.csproj", "{1DDA35EE-D3DD-4F32-8001-E4CF19AD90AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B752E831-553B-464D-92E3-37EDEF5BAFFE}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
