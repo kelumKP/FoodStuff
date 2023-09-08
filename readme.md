@@ -3,11 +3,11 @@ src
 
 API - FoodStuff.WebAPI
 
-Application - FoodStuff.Service ( suppose to do, service, FX Rate Logic of how to do it, abstraction implementation, IfxService, How I do)
+Application - FoodStuff.Service
 
-Domain - FoodStuff.Domain ( no logics, domain driven, Finance Currency, FX Rates)
+Domain - FoodStuff.Domain 
 
-Infrastructure - FoodStuff.DAL ( save part of application layers)
+Infrastructure - FoodStuff.DAL
 
 WebUI - FoodStuff.WebUI
 
@@ -19,3 +19,15 @@ test
 2. FoodStuff.Application.UnitTests
 
 3. FoodStuff.Domain.UnitTests
+
+![Alt text](WebUI\screnshots\default_ui.png)
+
+![Alt text](WebUI\screnshots\frontend_validation.png)
+
+![Alt text](WebUI\screnshots\food_vendor_updated.png)
+
+![Alt text](WebUI\screnshots\food_vendor_deleted.png)
+
+![Alt text](WebUI\screnshots\food_vendor_added.png)
+
+![Alt text](WebUI\screnshots\swagger_api.png)
