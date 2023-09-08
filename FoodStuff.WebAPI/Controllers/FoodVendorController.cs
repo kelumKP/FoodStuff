@@ -42,7 +42,7 @@ namespace FoodStuff.WebAPI.Controllers
                     var createdFoodVendor = await _service.CreateFoodVendorAsync(foodVendor);
 
                     // Return the list of food vendors.
-                    return Ok(createdFoodVendor);
+                    return Ok(await _service.GetFoodVendorsAsync());
                 }
 
                 // Return errors.
@@ -75,7 +75,7 @@ namespace FoodStuff.WebAPI.Controllers
                     }
 
                     // Return the list of food vendors.
-                    return Ok(updatedFoodVendor);
+                    return Ok(await _service.GetFoodVendorsAsync());
                 }
 
                 // Return errors.
