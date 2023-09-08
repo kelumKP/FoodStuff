@@ -38,7 +38,7 @@ namespace FoodStuff.Service.FoodVendors
             foodVendor.LastName = foodVendor.LastName;
 
 
-            return foodVendor;
+            return foodVendorObj;
         }
 
         public async Task<bool> UpdateFoodVendorAsync(FoodVendor foodVendor)

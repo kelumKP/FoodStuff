@@ -1,6 +1,8 @@
 using Moq;
 using Moq.Async;
 using FoodStuff.Service.FoodVendors.Queries;
+using FoodStuff.Domain.Abstraction;
+using FoodStuff.Service.FoodVendors;
 
 namespace FoodStuff.Service.IntegrationTests
 {
@@ -9,17 +11,19 @@ namespace FoodStuff.Service.IntegrationTests
         [Fact]
         public async void GetFoodVendors_ReturnsEmptyList_IfNoFoodVendorsExist()
         {
-            // Arrange
-            var mockFoodVendorService = new Mock<FoodVendors.FoodVendorService>();
-            mockFoodVendorService.SetupAsync(x => x.GetFoodVendorsAsync()).ReturnsAsync(new List<FoodVendor>());
+            // Create a mock of the FoodVendorRepository.
+            var foodVendorRepositoryMock = new Mock<IFoodVendorRepository>(MockBehavior.Strict);
+            foodVendorRepositoryMock.Setup(x => x.GetFoodVendorsAsync()).Returns(Task.FromResult(new List<FoodVendor>()));
 
-            var query = new GetFoodVendorsQuery(mockFoodVendorService.Object);
+            // Create an instance of the FoodVendorService class.
+            var foodVendorService = new FoodVendorService(foodVendorRepositoryMock.Object);
 
-            // Act
-            var foodVendors = await query.ExecuteAsync();
+            // Call the GetFoodVendorsAsync() method.
+            var foodVendors = await foodVendorService.GetFoodVendorsAsync();
 
-            // Assert
+            // Assert that the list of food vendors is empty.
             Assert.Empty(foodVendors);
         }
+
     }
 }
