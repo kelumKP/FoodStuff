@@ -1,7 +1,10 @@
 | Tech          | Version       |
 | ------------- | ------------- |
-| C#            |         12.0  |
-| .NET          |           6.0 |
+| C#            |         10    |
+| .NET          |           6   |
+| Angular       |      16.1.0   |
+| Bootstrap     |      -        |
+| Fontawesome   |      -        |
 
 src
 
