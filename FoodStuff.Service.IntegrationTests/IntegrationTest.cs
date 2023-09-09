@@ -3,27 +3,39 @@ using Moq.Async;
 using FoodStuff.Service.FoodVendors.Queries;
 using FoodStuff.Domain.Abstraction;
 using FoodStuff.Service.FoodVendors;
+using Castle.Core.Logging;
+using FoodStuff.Service.FoodVendors.Commands;
 
 namespace FoodStuff.Service.IntegrationTests
 {
     public class IntegrationTest
     {
         [Fact]
-        public async void GetFoodVendors_ReturnsEmptyList_IfNoFoodVendorsExist()
+        public async Task GetFoodVendorsAsync_ShouldReturnCorrectNumberOfVendors()
         {
-            // Create a mock of the FoodVendorRepository.
-            //var foodVendorRepositoryMock = new Mock<IFoodVendorRepository>(MockBehavior.Strict);
-            //foodVendorRepositoryMock.Setup(x => x.GetFoodVendorsAsync()).Returns(Task.FromResult(new List<FoodVendor>()));
+            // Arrange: Create a mock repository with sample data
+            var mockRepository = new Mock<IFoodVendorRepository>();
+            mockRepository.Setup(repo => repo.GetFoodVendorsAsync())
+                .ReturnsAsync(new List<FoodVendor>
+                {
+                    new FoodVendor { Id = 1, FirstName = "John", LastName = "Doe" },
+                    new FoodVendor { Id = 2, FirstName = "Jane", LastName = "Smith" }
+                });
 
-            // Create an instance of the FoodVendorService class.
-            //var foodVendorService = new FoodVendorService(foodVendorRepositoryMock.Object);
+            // Create the FoodVendorService with the mock repository
+            var service = new FoodVendorService(
+                new CreateFoodVendorCommand(mockRepository.Object),
+                new GetFoodVendorsQuery(mockRepository.Object),
+                new RemoveFoodVendorCommand(mockRepository.Object),
+                new UpdateFoodVendorCommand(mockRepository.Object),
+                new GetFoodVendorByIdQuery(mockRepository.Object)
+            );
 
-            // Call the GetFoodVendorsAsync() method.
-            //var foodVendors = await foodVendorService.GetFoodVendorsAsync();
+            // Act: Call the method you want to test
+            var vendors = await service.GetFoodVendorsAsync();
 
-            // Assert that the list of food vendors is empty.
-            //Assert.Empty(foodVendors);
+            // Assert: Check if the method returned the expected result
+            Assert.Equal(2, vendors.Count()); // Assuming you added 2 vendors in Arrange
         }
-
     }
 }
