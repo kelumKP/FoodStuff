@@ -10,6 +10,8 @@ namespace FoodStuff.Domain.Abstraction
     {
         Task<List<FoodVendor>> GetFoodVendorsAsync();
 
+        Task<FoodVendor> GetFoodVendorByIdAsync(int id);
+
         Task<bool> CreateFoodVendorAsync(FoodVendor foodVendor);
 
         Task<bool> RemoveFoodVendorAsync(int id);

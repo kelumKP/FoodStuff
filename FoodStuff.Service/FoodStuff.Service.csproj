@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="FoodVendors\Commands\FoodVendorData.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FoodStuff.Domain\FoodStuff.Domain.csproj" />
   </ItemGroup>
 

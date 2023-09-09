@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace FoodStuff.Service.FoodVendors.Queries
 {
-    public class GetFoodVendorsQuery
+    public class GetFoodVendorByIdQuery
     {
         private readonly IFoodVendorRepository _foodVendorRepository;
 
-        public GetFoodVendorsQuery(IFoodVendorRepository foodVendorRepository)
+        public GetFoodVendorByIdQuery(IFoodVendorRepository foodVendorRepository)
         {
             _foodVendorRepository = foodVendorRepository;
         }
 
-        public async Task<IEnumerable<FoodVendor>> ExecuteAsync()
+        public async Task<FoodVendor> ExecuteAsync(int id)
         {
             // Get the food vendors from the repository.
-            var foodVendors = await _foodVendorRepository.GetFoodVendorsAsync();
+            var foodVendors = await _foodVendorRepository.GetFoodVendorByIdAsync(id);
 
             // Return the food vendors.
             return foodVendors;

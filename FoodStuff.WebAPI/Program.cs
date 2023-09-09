@@ -1,6 +1,8 @@
 using FoodStuff.DAL;
 using FoodStuff.Domain.Abstraction;
 using FoodStuff.Service.FoodVendors;
+using FoodStuff.Service.FoodVendors.Commands;
+using FoodStuff.Service.FoodVendors.Queries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -15,7 +17,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IFoodVendorRepository, FoodVendorRepository>();
 builder.Services.AddScoped<IFoodVendorService, FoodVendorService>();
-
+builder.Services.AddTransient<CreateFoodVendorCommand>();
+builder.Services.AddTransient<GetFoodVendorsQuery>();
+builder.Services.AddTransient<RemoveFoodVendorCommand>();
+builder.Services.AddTransient<UpdateFoodVendorCommand>();
+builder.Services.AddTransient<GetFoodVendorByIdQuery>();
 static string TryGetSolutionDirectoryInfo(string currentPath = null)
 {
     var directory = new DirectoryInfo(

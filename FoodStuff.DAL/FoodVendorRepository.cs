@@ -32,6 +32,21 @@ namespace FoodStuff.DAL
             return foodVendorList;
         }
 
+        public async Task<FoodVendor> GetFoodVendorByIdAsync(int id)
+        {
+            // Get the food vendor from the repository.
+            var foodVendor = await _context.FoodVendors.FindAsync(id);
+
+            // If the food vendor was found, return it.
+            if (foodVendor != null)
+            {
+                return foodVendor;
+            }
+
+            // Otherwise, return null.
+            return null;
+        }
+
         public async Task<bool> RemoveFoodVendorAsync(int id)
         {
             // Delete the food vendor from the database.

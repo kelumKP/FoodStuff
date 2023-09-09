@@ -1,5 +1,6 @@
 ﻿using FoodStuff.Domain.Abstraction;
 using FoodStuff.Service.FoodVendors.Commands;
+using FoodStuff.Service.FoodVendors.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,54 +11,55 @@ namespace FoodStuff.Service.FoodVendors
 {
     public class FoodVendorService : IFoodVendorService
     {
+        private readonly CreateFoodVendorCommand _createFoodVendorCommand;
+        private readonly GetFoodVendorsQuery _getFoodVendorsQuery;
+        private readonly RemoveFoodVendorCommand _removeFoodVendorCommand;
+        private readonly UpdateFoodVendorCommand _updateFoodVendorCommand;
+        private readonly GetFoodVendorByIdQuery _getFoodVendorByIdQuery;
+        
 
-        private readonly IFoodVendorRepository _foodVendorRepository;
-
-        public FoodVendorService(IFoodVendorRepository foodVendorRepository)
+        public FoodVendorService(
+            CreateFoodVendorCommand createFoodVendorCommand,
+            GetFoodVendorsQuery getFoodVendorsQuery,
+            RemoveFoodVendorCommand removeFoodVendorCommand,
+            UpdateFoodVendorCommand updateFoodVendorCommand,
+            GetFoodVendorByIdQuery getFoodVendorByIdQuery)
         {
-            _foodVendorRepository = foodVendorRepository;
+            _createFoodVendorCommand = createFoodVendorCommand;
+            _getFoodVendorsQuery = getFoodVendorsQuery;
+            _removeFoodVendorCommand = removeFoodVendorCommand;
+            _updateFoodVendorCommand = updateFoodVendorCommand;
+            _getFoodVendorByIdQuery = getFoodVendorByIdQuery;
         }
 
         public async Task<IEnumerable<FoodVendor>> GetFoodVendorsAsync()
         {
-            // Get the food vendors from the repository.
-            var foodVendors = await _foodVendorRepository.GetFoodVendorsAsync();
-
-            return foodVendors;
+            // Get the food vendors from the commands.
+            return await _getFoodVendorsQuery.ExecuteAsync();
         }
 
         public async Task<bool> CreateFoodVendorAsync(FoodVendor foodVendor)
         {
-            // Create a new food vendor.
-            var createdFoodVendor = await _foodVendorRepository.CreateFoodVendorAsync(foodVendor);
-
-            return createdFoodVendor;
+            // Create a new food vendor using the command.
+            return await _createFoodVendorCommand.Execute(foodVendor);
         }
 
         public async Task<bool> UpdateFoodVendorAsync(FoodVendor foodVendor)
         {
-            // Update the food vendor in the database.
-            var updatedFoodVendor = await _foodVendorRepository.UpdateFoodVendorAsync(foodVendor);
-
-            return updatedFoodVendor;
+            // Update the food vendor using the command.
+            return await _updateFoodVendorCommand.Execute(foodVendor);
         }
 
         public async Task<bool> RemoveFoodVendorAsync(int id)
         {
-            // Delete the food vendor from the database.
-            var removedFoodVendor = await _foodVendorRepository.RemoveFoodVendorAsync(id);
-
-            return removedFoodVendor;
+            // Remove the food vendor using the command.
+            return await _removeFoodVendorCommand.Execute(id);
         }
 
         public async Task<FoodVendor> GetFoodVendorByIdAsync(int id)
         {
-            // Get the food vendor from the repository.
-            var foodVendors = await _foodVendorRepository.GetFoodVendorsAsync();
-            var foodVendor = foodVendors.FirstOrDefault(x => x.Id == id);
-
-            return foodVendor;
+            // Get the food vendor from the commands.
+            return await _getFoodVendorByIdQuery.ExecuteAsync(id);
         }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodStuff.Domain.Abstraction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,21 +9,21 @@ namespace FoodStuff.Service.FoodVendors.Commands
 {
     public class UpdateFoodVendorCommand
     {
-        private readonly FoodVendorService _foodVendorService;
+        private readonly IFoodVendorRepository _foodVendorRepository;
 
-        public UpdateFoodVendorCommand(FoodVendorService foodVendorService)
+        public UpdateFoodVendorCommand(IFoodVendorRepository foodVendorRepository)
         {
-            _foodVendorService = foodVendorService;
+            _foodVendorRepository = foodVendorRepository;
         }
 
-        public async Task Execute(FoodVendorData foodVendorData)
+        public async Task<bool> Execute(FoodVendor foodVendorData)
         {
             // Update the food vendor in the database.
-            var foodVendor = await _foodVendorService.GetFoodVendorByIdAsync(foodVendorData.Id);
+            var foodVendor = await _foodVendorRepository.GetFoodVendorByIdAsync(foodVendorData.Id);
             foodVendor.FirstName = foodVendorData.FirstName;
             foodVendor.LastName = foodVendorData.LastName;
 
-            await _foodVendorService.UpdateFoodVendorAsync(foodVendor);
+            return await _foodVendorRepository.UpdateFoodVendorAsync(foodVendor);
         }
     }
 }

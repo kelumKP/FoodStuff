@@ -13,14 +13,14 @@ namespace FoodStuff.Service.FoodVendors.Commands
 {
     public class CreateFoodVendorCommand
     {
-        private readonly FoodVendorService _foodVendorService;
+        private readonly IFoodVendorRepository _foodVendorRepository;
 
-        public CreateFoodVendorCommand(FoodVendorService foodVendorService)
+        public CreateFoodVendorCommand(IFoodVendorRepository foodVendorRepository)
         {
-            _foodVendorService = foodVendorService;
+            _foodVendorRepository = foodVendorRepository;
         }
 
-        public void Execute(FoodVendorData foodVendorData)
+        public async Task<bool> Execute(FoodVendor foodVendorData)
         {
             // Create a new food vendor.
             var foodVendor = new FoodVendor
@@ -29,8 +29,7 @@ namespace FoodStuff.Service.FoodVendors.Commands
                 LastName = foodVendorData.LastName,
             };
 
-            // Save the food vendor to the repository.
-            _foodVendorService.CreateFoodVendorAsync(foodVendor);
+            return await _foodVendorRepository.CreateFoodVendorAsync(foodVendor);
         }
     }
 }
