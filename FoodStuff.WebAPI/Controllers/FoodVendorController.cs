@@ -20,7 +20,7 @@ namespace FoodStuff.WebAPI.Controllers
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet]   // Get the food vendors 
         public async Task<ActionResult<IEnumerable<FoodVendor>>> GetFoodVendors()
         {
             // Get the food vendors from the service.
@@ -30,7 +30,7 @@ namespace FoodStuff.WebAPI.Controllers
             return Ok(foodVendors);
         }
 
-        [HttpPost]
+        [HttpPost]    // Create the food vendor.
         public async Task<ActionResult<FoodVendor>> CreateFoodVendor(FoodVendor foodVendor)
         {
             try
@@ -58,7 +58,7 @@ namespace FoodStuff.WebAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut]    // Update the food vendor.
         public async Task<ActionResult<FoodVendor>> UpdateFoodVendor(FoodVendor foodVendor)
         {
             try
@@ -91,7 +91,7 @@ namespace FoodStuff.WebAPI.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")]    // Remove the food vendor.
         public async Task<ActionResult<FoodVendor>> RemoveFoodVendor(int id)
         {
             try

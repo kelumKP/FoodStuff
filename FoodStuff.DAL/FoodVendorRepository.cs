@@ -1,7 +1,9 @@
 ﻿using FoodStuff.Domain.Abstraction;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,72 +14,121 @@ namespace FoodStuff.DAL
     {
 
         private readonly DataContext _context;
-        public FoodVendorRepository(DataContext context)
+        private readonly ILogger<FoodVendorRepository> _logger;
+
+        public FoodVendorRepository(DataContext context, ILogger<FoodVendorRepository> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<bool> CreateFoodVendorAsync(FoodVendor foodVendor)
         {
-            // Save the food vendor to the database.
-            await _context.FoodVendors.AddAsync(foodVendor);
-            await _context.SaveChangesAsync();
+            try
+            {
+                // Save the food vendor to the database.
+                await _context.FoodVendors.AddAsync(foodVendor);
+                await _context.SaveChangesAsync();
 
-            return true;
+                return true;
+            }
+            catch (DbException e)
+            {
+                // Handle the database exception.
+                _logger.LogError(e, "Error creating food vendor");
+                return false;
+            }
         }
 
         public async Task<List<FoodVendor>> GetFoodVendorsAsync()
         {
-            var foodVendorList = await _context.FoodVendors.ToListAsync();
-            return foodVendorList;
+            try
+            {
+                // Get the food vendors from the database.
+                var foodVendorList = await _context.FoodVendors.ToListAsync();
+                return foodVendorList;
+            }
+            catch (DbException e)
+            {
+                // Handle the database exception.
+                _logger.LogError(e, "Error getting food vendors");
+                return null;
+            }
         }
 
         public async Task<FoodVendor> GetFoodVendorByIdAsync(int id)
         {
-            // Get the food vendor from the repository.
-            var foodVendor = await _context.FoodVendors.FindAsync(id);
-
-            // If the food vendor was found, return it.
-            if (foodVendor != null)
+            try
             {
-                return foodVendor;
-            }
+                // Get the food vendor from the repository.
+                var foodVendor = await _context.FoodVendors.FindAsync(id);
 
-            // Otherwise, return null.
-            return null;
+                // If the food vendor was found, return it.
+                if (foodVendor != null)
+                {
+                    return foodVendor;
+                }
+
+                // Otherwise, return null.
+                return null;
+            }
+            catch (DbException e)
+            {
+                // Handle the database exception.
+                _logger.LogError(e, "Error getting food vendor by id");
+                return null;
+            }
         }
 
         public async Task<bool> RemoveFoodVendorAsync(int id)
         {
-            // Delete the food vendor from the database.
-            var foodVendor = await _context.FoodVendors.FindAsync(id);
-            if (foodVendor != null)
+            try
             {
-                _context.FoodVendors.Remove(foodVendor);
-                await _context.SaveChangesAsync();
+                // Delete the food vendor from the database.
+                var foodVendor = await _context.FoodVendors.FindAsync(id);
+                if (foodVendor != null)
+                {
+                    _context.FoodVendors.Remove(foodVendor);
+                    await _context.SaveChangesAsync();
 
-                return true;
+                    return true;
+                }
+
+                return false;
             }
-
-            return false;
+            catch (DbException e)
+            {
+                // Handle the database exception.
+                _logger.LogError(e, "Error removing food vendor");
+                return false;
+            }
         }
 
         public async Task<bool> UpdateFoodVendorAsync(FoodVendor foodVendor)
         {
-            // Update the food vendor in the database.
-            var foodVendorInDb = await _context.FoodVendors.FindAsync(foodVendor.Id);
-            if (foodVendorInDb != null)
+            try
             {
-                foodVendorInDb.FirstName = foodVendor.FirstName;
-                foodVendorInDb.LastName = foodVendor.LastName;
+                // Update the food vendor in the database.
+                var foodVendorInDb = await _context.FoodVendors.FindAsync(foodVendor.Id);
+                if (foodVendorInDb != null)
+                {
+                    foodVendorInDb.FirstName = foodVendor.FirstName;
+                    foodVendorInDb.LastName = foodVendor.LastName;
 
-                _context.FoodVendors.Update(foodVendorInDb);
-                await _context.SaveChangesAsync();
+                    _context.FoodVendors.Update(foodVendorInDb);
+                    await _context.SaveChangesAsync();
 
-                return true;
+                    return true;
+                }
+
+                return false;
             }
-
-            return false;
+            catch (DbException e)
+            {
+                // Handle the database exception.
+                _logger.LogError(e, "Error updating food vendor");
+                return false;
+            }
         }
     }
 }

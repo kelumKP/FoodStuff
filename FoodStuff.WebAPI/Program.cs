@@ -22,6 +22,8 @@ builder.Services.AddTransient<GetFoodVendorsQuery>();
 builder.Services.AddTransient<RemoveFoodVendorCommand>();
 builder.Services.AddTransient<UpdateFoodVendorCommand>();
 builder.Services.AddTransient<GetFoodVendorByIdQuery>();
+
+//Getting the solution directory path from local folder
 static string TryGetSolutionDirectoryInfo(string currentPath = null)
 {
     var directory = new DirectoryInfo(
@@ -37,6 +39,8 @@ static string TryGetSolutionDirectoryInfo(string currentPath = null)
 var solutionDirectory = TryGetSolutionDirectoryInfo();
 // if directory found
 
+
+//adjusting the connection string
 builder.Services.AddDbContext<DataContext>(options => {
 
     // Construct the full path to the database file
@@ -62,6 +66,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// fixing the cors issue with frontend path
 app.UseCors(options =>
 //options.WithOrigins("http://localhost:61402")
  options.WithOrigins("*")
