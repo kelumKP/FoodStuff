@@ -6,36 +6,47 @@
 | Bootstrap     |      -        |
 | Fontawesome   |      -        |
 
-src
+##### Source
+
+###### API - FoodStuff.WebAPI
+
+###### Application - FoodStuff.Service
+
+###### Domain - FoodStuff.Domain 
+
+###### Infrastructure - FoodStuff.DAL
+
+###### WebUI - FoodStuff.WebUI
 
 
-API - FoodStuff.WebAPI
+##### Test 
 
-Application - FoodStuff.Service
+###### FoodStuff.Application.IntegrationTests
 
-Domain - FoodStuff.Domain 
+###### FoodStuff.Application.UnitTests
 
-Infrastructure - FoodStuff.DAL
+###### FoodStuff.Domain.UnitTests
 
-WebUI - FoodStuff.WebUI
-
-
-test 
-
-1. FoodStuff.Application.IntegrationTests
-
-2. FoodStuff.Application.UnitTests
-
-3. FoodStuff.Domain.UnitTests
+####### Default UI
 
 ![Alt text](WebUI/screenshots/default_ui.png)
 
+####### Frontend Validation
+
 ![Alt text](WebUI/screenshots/frontend_validation.png)
+
+####### Update Vendor
 
 ![Alt text](WebUI/screenshots/food_vendor_updated.png)
 
+####### Deleted Vendor
+
 ![Alt text](WebUI/screenshots/food_vendor_deleted.png)
 
+####### Vendor Added
+
 ![Alt text](WebUI/screenshots/food_vendor_added.png)
+
+####### Swagger UI
 
 ![Alt text](WebUI/screenshots/swagger_api.png)
